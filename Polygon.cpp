@@ -5,12 +5,14 @@ polygon::polygon(const std::string& path_to_file)
     polygon_init(path_to_file);
 }
 
+std::vector<cv::Point>& polygon::get_polygon()
+{
+    return polygon_dots;
+}
+
 void polygon::add_dot_to_polygon(int coordinate_x, int coordinate_y)
 {
-    point dot{};
-    dot.coordinate_x = coordinate_x;
-    dot.coordinate_y = coordinate_y;
-    polygon_dots.push_back(dot);
+    polygon_dots.emplace_back(coordinate_x, coordinate_y);
 }
 
 void polygon::polygon_init(const std::string& path_to_file)
@@ -72,8 +74,8 @@ bool polygon::check_point_in_polygon(int coordinate_x, int coordinate_y)
 
     for (i = 0, j = polygon_dots.size() - 1; i < polygon_dots.size(); j = i++)
     {
-        if (((polygon_dots[i].coordinate_y > coordinate_y) != (polygon_dots[j].coordinate_y > coordinate_y)) &&
-            (coordinate_x < (polygon_dots[j].coordinate_x - polygon_dots[i].coordinate_x) * (coordinate_y - polygon_dots[i].coordinate_y) / (polygon_dots[j].coordinate_y - polygon_dots[i].coordinate_y) + polygon_dots[i].coordinate_x))
+        if (((polygon_dots[i].y > coordinate_y) != (polygon_dots[j].y > coordinate_y)) &&
+            (coordinate_x < (polygon_dots[j].x - polygon_dots[i].x) * (coordinate_y - polygon_dots[i].y) / (polygon_dots[j].y - polygon_dots[i].y) + polygon_dots[i].x))
         {
             inside = !inside;
         }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.25)
 project(untitled1)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 find_package(OpenCV)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 23)
 
 add_executable(untitled1 Main.cpp Polygon.cpp Polygon.h)
 
